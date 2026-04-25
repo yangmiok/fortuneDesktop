@@ -1,0 +1,242 @@
+/* TabPanel 组件样式 */
+.tab-panel {
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  background: #fff;
+}
+
+/* 标签页样式 */
+.fortune-tabs {
+  height: 100%;
+}
+
+.fortune-tabs .ant-tabs-content-holder {
+  height: calc(100% - 46px);
+  overflow-y: auto;
+}
+
+.fortune-tabs .ant-tabs-content {
+  height: 100%;
+}
+
+.fortune-tabs .ant-tabs-tabpane {
+  height: 100%;
+  padding: 0;
+}
+
+/* 标签头部样式 */
+.fortune-tabs .ant-tabs-tab {
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px 8px 0 0;
+  transition: all 0.3s ease;
+}
+
+.fortune-tabs .ant-tabs-tab:hover {
+  background: #f0f2f5;
+}
+
+.fortune-tabs .ant-tabs-tab-active {
+  background: #fff;
+  border-bottom: 2px solid #1890ff;
+}
+
+.fortune-tabs .ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #1890ff;
+  font-weight: 600;
+}
+
+/* 标签内容区域 */
+.tab-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: #fafafa;
+  border-radius: 0 0 8px 8px;
+}
+
+/* 标签头部信息 */
+.tab-header {
+  margin-bottom: 16px;
+}
+
+.tab-header .tab-icon {
+  font-size: 24px;
+  color: #1890ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: #e6f7ff;
+  border-radius: 50%;
+}
+
+/* 标签主体内容 */
+.tab-body {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* 输入区域样式 */
+.input-section {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.input-section .ant-card-head {
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.input-section .ant-card-head-title {
+  font-weight: 600;
+  color: #495057;
+}
+
+/* 结果区域样式 */
+.result-section {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.result-section .ant-card-head {
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.result-section .ant-card-head-title {
+  font-weight: 600;
+  color: #495057;
+}
+
+/* 占位符样式 */
+.form-placeholder,
+.result-placeholder {
+  padding: 40px 20px;
+  text-align: center;
+  background: #fff;
+  border: 2px dashed #d9d9d9;
+  border-radius: 6px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-placeholder:hover,
+.result-placeholder:hover {
+  border-color: #40a9ff;
+  background: #f6ffed;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .tab-panel {
+    padding: 8px;
+  }
+  
+  .tab-content {
+    padding: 12px;
+  }
+  
+  .fortune-tabs .ant-tabs-tab {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  
+  .tab-header .tab-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+  
+  .form-placeholder,
+  .result-placeholder {
+    padding: 20px 12px;
+    min-height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fortune-tabs .ant-tabs-tab span {
+    display: none;
+  }
+  
+  .fortune-tabs .ant-tabs-tab {
+    padding: 8px;
+    min-width: 48px;
+  }
+}
+
+/* 动画效果 */
+.tab-content {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 标签切换动画 */
+.fortune-tabs .ant-tabs-content-animated {
+  transition: margin 0.3s ease;
+}
+
+/* 自定义滚动条 */
+.tab-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tab-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.tab-body::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.tab-body::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* 深色主题支持 */
+@media (prefers-color-scheme: dark) {
+  .tab-panel {
+    background: #141414;
+  }
+  
+  .tab-content {
+    background: #1f1f1f;
+  }
+  
+  .input-section,
+  .result-section {
+    background: #262626;
+  }
+  
+  .form-placeholder,
+  .result-placeholder {
+    background: #1f1f1f;
+    border-color: #434343;
+  }
+  
+  .form-placeholder:hover,
+  .result-placeholder:hover {
+    background: #262626;
+    border-color: #1890ff;
+  }
+}

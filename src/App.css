@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 全局样式重置 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'SimHei', sans-serif;
+}
+
+/* 自定义样式 */
+.fortune-app {
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'SimHei', sans-serif;
+}
+
+/* Ant Design 主题定制 */
+.ant-layout {
+  min-height: 100vh;
+}
+
+/* 表单样式 */
+.birth-form {
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-section {
+  margin-bottom: 24px;
+}
+
+.form-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #1f2937;
+  border-bottom: 2px solid #f3f4f6;
+  padding-bottom: 8px;
+}
+
+/* 结果显示样式 */
+.calculation-result {
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 24px;
+}
+
+.result-section {
+  margin-bottom: 20px;
+}
+
+.result-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 12px;
+}
+
+/* 加载状态 */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+/* 错误状态 */
+.error-message {
+  color: #dc2626;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin: 16px 0;
+}
+
+/* 成功状态 */
+.success-message {
+  color: #059669;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin: 16px 0;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .birth-form {
+    padding: 16px;
+  }
+}

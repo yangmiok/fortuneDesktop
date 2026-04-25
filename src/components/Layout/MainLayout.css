@@ -1,0 +1,47 @@
+.main-layout {
+  min-height: 100vh;
+  background: #f0f2f5;
+}
+
+.layout-body {
+  flex: 1;
+}
+
+.main-content {
+  margin: 0;
+  padding: 24px;
+  background: #f0f2f5;
+  min-height: calc(100vh - 64px);
+  overflow-y: auto;
+}
+
+.content-wrapper {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  min-height: calc(100vh - 112px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 16px;
+  }
+  
+  .content-wrapper {
+    border-radius: 4px;
+    min-height: calc(100vh - 96px);
+  }
+}
+
+@media (max-width: 576px) {
+  .main-content {
+    padding: 8px;
+  }
+  
+  .content-wrapper {
+    border-radius: 0;
+    box-shadow: none;
+    min-height: calc(100vh - 80px);
+  }
+}
