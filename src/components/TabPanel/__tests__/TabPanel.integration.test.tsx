@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { TabPanel } from '../TabPanel';
@@ -42,12 +41,11 @@ describe('TabPanel Integration', () => {
   test('应该显示标签页标题', () => {
     render(<TabPanel />);
     
-    // 验证标签页标题
-    expect(screen.getByText('四柱八字')).toBeInTheDocument();
-    expect(screen.getByText('紫微斗数')).toBeInTheDocument();
-    expect(screen.getByText('六爻预测')).toBeInTheDocument();
-    expect(screen.getByText('奇门遁甲')).toBeInTheDocument();
-    expect(screen.getByText('风水堪舆')).toBeInTheDocument();
+    expect(screen.getAllByText('四柱八字').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('紫微斗数').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('六爻预测').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('奇门遁甲').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('风水堪舆').length).toBeGreaterThan(0);
   });
 
   test('应该能够点击标签页', () => {
@@ -64,8 +62,7 @@ describe('TabPanel Integration', () => {
   test('应该显示内容区域', () => {
     render(<TabPanel />);
     
-    // 验证内容区域存在
-    expect(screen.getByText('输入信息')).toBeInTheDocument();
-    expect(screen.getByText('计算结果')).toBeInTheDocument();
+    expect(screen.getByText('出生信息')).toBeInTheDocument();
+    expect(screen.getByText('提交测算')).toBeInTheDocument();
   });
 });

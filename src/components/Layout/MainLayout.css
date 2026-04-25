@@ -1,47 +1,34 @@
 .main-layout {
   min-height: 100vh;
-  background: #f0f2f5;
+  padding: 0;
+  background: transparent;
 }
 
 .layout-body {
   flex: 1;
+  min-height: 0;
 }
 
 .main-content {
-  margin: 0;
-  padding: 24px;
-  background: #f0f2f5;
-  min-height: calc(100vh - 64px);
-  overflow-y: auto;
+  min-height: calc(100vh - 108px);
+  padding: 0;
+  overflow: auto;
+  background: transparent;
 }
 
 .content-wrapper {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  min-height: calc(100vh - 112px);
+  min-height: 100%;
+  background: rgba(255, 252, 247, 0.48);
 }
 
-/* 响应式设计 */
+@media (max-width: 1024px) {
+  .main-content {
+    min-height: calc(100vh - 92px);
+  }
+}
+
 @media (max-width: 768px) {
   .main-content {
-    padding: 16px;
-  }
-  
-  .content-wrapper {
-    border-radius: 4px;
-    min-height: calc(100vh - 96px);
-  }
-}
-
-@media (max-width: 576px) {
-  .main-content {
-    padding: 8px;
-  }
-  
-  .content-wrapper {
-    border-radius: 0;
-    box-shadow: none;
-    min-height: calc(100vh - 80px);
+    min-height: auto;
   }
 }

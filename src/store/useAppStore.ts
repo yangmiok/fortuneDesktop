@@ -8,6 +8,7 @@ export const useAppStore = create<AppStore>((set) => ({
   // 初始状态
   ui: {
     sidebarCollapsed: false,
+    activeMenu: 'home',
     activeTab: 'bazi',
     loading: false,
     theme: 'light'
@@ -36,6 +37,13 @@ export const useAppStore = create<AppStore>((set) => ({
     ui: {
       ...state.ui,
       sidebarCollapsed: !state.ui.sidebarCollapsed
+    }
+  })),
+
+  setActiveMenu: (menu: string) => set((state) => ({
+    ui: {
+      ...state.ui,
+      activeMenu: menu
     }
   })),
 

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { Form, Select, Row, Col, Card, Typography } from 'antd';
+import { Form, Select, Row, Col } from 'antd';
 import { BirthInfo, ValidationErrors } from '../../types';
 import { LOCATION_DATA } from '../../constants';
 
-const { Title } = Typography;
 const { Option } = Select;
+type SelectOption = { value: string; label: string };
 
 interface LocationInfoFormProps {
   value: Partial<BirthInfo>;
@@ -17,14 +17,12 @@ const LocationInfoForm: React.FC<LocationInfoFormProps> = ({
   onChange,
   errors
 }) => {
-  // 处理字段变更
   const handleFieldChange = (field: keyof BirthInfo, fieldValue: any) => {
     const newValue = {
       ...value,
       [field]: fieldValue
     };
 
-    // 如果改变了国家或省份，需要重置下级选项
     if (field === 'country') {
       newValue.province = '';
       newValue.city = '';
@@ -35,15 +33,13 @@ const LocationInfoForm: React.FC<LocationInfoFormProps> = ({
     onChange(newValue);
   };
 
-  // 获取国家选项
   const getCountryOptions = () => {
     return Object.keys(LOCATION_DATA).map(country => ({
       value: country,
       label: country
-    }));
+    })) as SelectOption[];
   };
 
-  // 获取省份选项
   const getProvinceOptions = () => {
     if (!value.country || !LOCATION_DATA[value.country]) {
       return [];
@@ -52,10 +48,9 @@ const LocationInfoForm: React.FC<LocationInfoFormProps> = ({
     return Object.keys(LOCATION_DATA[value.country]).map(province => ({
       value: province,
       label: province
-    }));
+    })) as SelectOption[];
   };
 
-  // 获取城市选项
   const getCityOptions = () => {
     if (!value.country || !value.province || 
         !LOCATION_DATA[value.country] || 
@@ -66,13 +61,12 @@ const LocationInfoForm: React.FC<LocationInfoFormProps> = ({
     return LOCATION_DATA[value.country][value.province].map(city => ({
       value: city,
       label: city
-    }));
+    })) as SelectOption[];
   };
 
-  // 验证位置一致性
   const validateLocationConsistency = () => {
     if (!value.country || !value.province || !value.city) {
-      return true; // 不完整的选择不进行一致性验证
+      return true;
     }
 
     const countryData = LOCATION_DATA[value.country];
@@ -84,11 +78,10 @@ const LocationInfoForm: React.FC<LocationInfoFormProps> = ({
     return provinceData.includes(value.city);
   };
 
-  // 当省份改变时，如果当前城市不在新省份中，清空城市选择
   useEffect(() => {
     if (value.province && value.city) {
       const cityOptions = getCityOptions();
-      const isCityValid = cityOptions.some(option => option.value === value.city);
+      const isCityValid = cityOptions.some((option: SelectOption) => option.value === value.city);
       
       if (!isCityValid) {
         onChange({
@@ -102,11 +95,15 @@ const LocationInfoForm: React.FC<LocationInfoFormProps> = ({
   const isLocationConsistent = validateLocationConsistency();
 
   return (
-    <Card title={<Title level={4}>出生地点</Title>} className="location-info-form">
-      <Form layout="vertical" size="large">
-        <Row gutter={[16, 16]}>
-          {/* 国家/地区 */}
-          <Col xs={24} sm={8}>
+    <section className="fortune-section-card">
+      <div className="fortune-section-heading">
+        <h3>地点信息</h3>
+        <span>用于时区/真太阳时参考</span>
+      </div>
+
+      <Form layout="vertical" size="large" className="fortune-form">
+        <Row gutter={[24, 0]}>
+          <Col xs={24} md={12}>
             <Form.Item
               label="国家/地区"
               validateStatus={errors.country ? 'error' : ''}
@@ -119,7 +116,7 @@ const LocationInfoForm: React.FC<LocationInfoFormProps> = ({
                 onChange={(val) => handleFieldChange('country', val)}
                 data-testid="country-select"
               >
-                {getCountryOptions().map(option => (
+                {getCountryOptions().map((option: SelectOption) => (
                   <Option key={option.value} value={option.value}>
                     {option.label}
                   </Option>
@@ -128,8 +125,9 @@ const LocationInfoForm: React.FC<LocationInfoFormProps> = ({
             </Form.Item>
           </Col>
 
-          {/* 省份/州 */}
-          <Col xs={24} sm={8}>
+          <Col xs={24} md={12} />
+
+          <Col xs={24} md={12}>
             <Form.Item
               label="省份/州"
               validateStatus={errors.province ? 'error' : ''}
@@ -143,7 +141,7 @@ const LocationInfoForm: React.FC<LocationInfoFormProps> = ({
                 disabled={!value.country}
                 data-testid="province-select"
               >
-                {getProvinceOptions().map(option => (
+                {getProvinceOptions().map((option: SelectOption) => (
                   <Option key={option.value} value={option.value}>
                     {option.label}
                   </Option>
@@ -152,8 +150,7 @@ const LocationInfoForm: React.FC<LocationInfoFormProps> = ({
             </Form.Item>
           </Col>
 
-          {/* 城市 */}
-          <Col xs={24} sm={8}>
+          <Col xs={24} md={12}>
             <Form.Item
               label="城市"
               validateStatus={errors.city ? 'error' : ''}
@@ -167,11 +164,9 @@ const LocationInfoForm: React.FC<LocationInfoFormProps> = ({
                 disabled={!value.province}
                 data-testid="city-select"
                 showSearch
-                filterOption={(input, option) =>
-                  option?.children?.toString().toLowerCase().includes(input.toLowerCase()) ?? false
-                }
+                optionFilterProp="children"
               >
-                {getCityOptions().map(option => (
+                {getCityOptions().map((option: SelectOption) => (
                   <Option key={option.value} value={option.value}>
                     {option.label}
                   </Option>
@@ -181,29 +176,19 @@ const LocationInfoForm: React.FC<LocationInfoFormProps> = ({
           </Col>
         </Row>
 
-        {/* 位置一致性验证提示 */}
         {value.country && value.province && value.city && !isLocationConsistent && (
-          <Row>
-            <Col span={24}>
-              <div style={{ color: '#ff4d4f', fontSize: '14px', marginTop: '8px' }}>
-                ⚠️ 位置信息不一致：{value.city} 不属于 {value.province}
-              </div>
-            </Col>
-          </Row>
+          <div className="fortune-inline-message fortune-inline-message-error">
+            位置信息不一致：{value.city} 不属于 {value.province}
+          </div>
         )}
 
-        {/* 特殊提示：北京市16个区 */}
         {value.country === '中国' && value.province === '北京市' && (
-          <Row>
-            <Col span={24}>
-              <div style={{ color: '#1890ff', fontSize: '12px', marginTop: '8px' }}>
-                💡 北京市包含16个区：东城区、西城区、朝阳区、丰台区、石景山区、海淀区、门头沟区、房山区、通州区、顺义区、昌平区、大兴区、怀柔区、平谷区、密云区、延庆区
-              </div>
-            </Col>
-          </Row>
+          <div className="fortune-inline-message">
+            北京市（16个区）
+          </div>
         )}
       </Form>
-    </Card>
+    </section>
   );
 };
 

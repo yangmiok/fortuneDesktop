@@ -1,56 +1,77 @@
 .app-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 0 24px;
+  height: 108px;
+  padding: 0 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 100;
+  background: rgba(255, 252, 247, 0.92);
+  border-bottom: 1px solid rgba(188, 163, 122, 0.2);
 }
 
 .header-left {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
 }
 
-.sidebar-toggle {
-  color: white;
-  font-size: 18px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  transition: all 0.3s ease;
+.brand-mark {
+  width: 56px;
+  height: 56px;
+  border: 1px solid rgba(188, 147, 90, 0.35);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #fffdf9 0%, #f6eee3 100%);
+  position: relative;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-.sidebar-toggle:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+.brand-mark-ring {
+  position: absolute;
+  inset: 11px;
+  border: 3px solid #b98a4b;
+  border-radius: 50%;
+}
+
+.brand-mark-ring::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 3px solid #b98a4b;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  right: 4px;
+  top: 2px;
+  transform: rotate(20deg);
+}
+
+.brand-mark-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #b98a4b;
+  left: 18px;
+  bottom: 16px;
 }
 
 .app-branding {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .app-title {
-  color: white !important;
   margin: 0 !important;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 1.2;
+  color: #1f2431 !important;
+  font-size: 26px !important;
+  font-weight: 700 !important;
 }
 
 .app-subtitle {
-  color: rgba(255, 255, 255, 0.85) !important;
-  font-size: 12px;
-  line-height: 1;
-  margin: 0;
+  color: #7d7b7a !important;
+  font-size: 14px;
 }
 
 .header-right {
@@ -58,75 +79,108 @@
   align-items: center;
 }
 
-.header-button {
-  color: white;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.3s ease;
+.header-right .ant-space {
+  gap: 12px !important;
 }
 
-.header-button:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+.header-button {
+  height: 52px;
+  padding: 0 12px;
+  border: none;
+  color: #5f6470;
+  font-size: 15px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.header-button:hover,
+.header-button:focus {
+  color: #af7e3f !important;
+  background: rgba(191, 148, 81, 0.08) !important;
 }
 
 .header-button .anticon {
-  font-size: 16px;
+  font-size: 20px;
+}
+
+.header-button-primary {
+  min-width: 164px;
+  padding: 0 26px;
+  color: #fff;
+  border: 1px solid #bb8c4e;
+  background: linear-gradient(180deg, #c99956 0%, #b68547 100%);
+  box-shadow: 0 10px 20px rgba(177, 130, 67, 0.16);
+}
+
+.header-button-primary:hover,
+.header-button-primary:focus {
+  color: #fff !important;
+  border-color: #bb8c4e !important;
+  background: linear-gradient(180deg, #cea261 0%, #b68547 100%) !important;
 }
 
 .button-text {
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 600;
 }
 
-/* 响应式设计 */
+@media (max-width: 1024px) {
+  .app-header {
+    height: 92px;
+    padding: 0 20px;
+  }
+
+  .app-title {
+    font-size: 22px !important;
+  }
+
+  .app-subtitle {
+    font-size: 13px;
+  }
+}
+
 @media (max-width: 768px) {
   .app-header {
-    padding: 0 16px;
+    height: auto;
+    padding: 18px 16px;
+    align-items: flex-start;
+    gap: 12px;
+    flex-direction: column;
   }
-  
-  .app-title {
-    font-size: 18px !important;
+
+  .header-right,
+  .header-right .ant-space {
+    width: 100%;
   }
-  
-  .app-subtitle {
-    font-size: 11px;
+
+  .header-right .ant-space {
+    justify-content: space-between;
   }
-  
-  .header-button .button-text {
-    display: none;
-  }
-  
+
   .header-button {
-    padding: 0 12px;
-    width: 40px;
-    justify-content: center;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .header-button-primary {
+    min-width: 0;
   }
 }
 
 @media (max-width: 576px) {
-  .app-header {
-    padding: 0 12px;
+  .button-text {
+    font-size: 13px;
   }
-  
+
+  .header-button {
+    padding: 0 10px;
+  }
+
   .app-title {
-    font-size: 16px !important;
+    font-size: 18px !important;
   }
-  
+
   .app-subtitle {
     display: none;
-  }
-  
-  .header-button {
-    padding: 0 8px;
-    width: 36px;
-  }
-  
-  .header-button .anticon {
-    font-size: 14px;
   }
 }

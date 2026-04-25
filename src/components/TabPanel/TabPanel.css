@@ -1,242 +1,278 @@
-/* TabPanel 组件样式 */
 .tab-panel {
+  position: relative;
   width: 100%;
-  height: 100%;
-  padding: 16px;
-  background: #fff;
+  min-height: 100%;
+  padding: 20px 26px 18px;
 }
 
-/* 标签页样式 */
 .fortune-tabs {
-  height: 100%;
+  position: relative;
+}
+
+.fortune-tabs .ant-tabs-nav {
+  margin: 0;
+}
+
+.fortune-tabs .ant-tabs-nav::before {
+  border-bottom: none !important;
+}
+
+.fortune-tabs .ant-tabs-nav-wrap {
+  padding: 0 10px 18px;
+}
+
+.fortune-tabs .ant-tabs-tab {
+  min-width: 206px;
+  height: 56px;
+  margin: 0 18px 0 0 !important;
+  padding: 0 24px !important;
+  border: 1px solid rgba(204, 191, 173, 0.75) !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.76) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #565d68;
+}
+
+.fortune-tabs .ant-tabs-tab.ant-tabs-tab-active {
+  border-color: rgba(191, 148, 81, 0.7) !important;
+  background: rgba(255, 252, 247, 0.95) !important;
+  box-shadow: 0 8px 18px rgba(191, 148, 81, 0.08);
+}
+
+.fortune-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #8f6231;
+}
+
+.fortune-tabs .ant-tabs-ink-bar {
+  display: none;
+}
+
+.fortune-tab-label {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0;
 }
 
 .fortune-tabs .ant-tabs-content-holder {
-  height: calc(100% - 46px);
-  overflow-y: auto;
+  overflow: visible;
 }
 
-.fortune-tabs .ant-tabs-content {
-  height: 100%;
-}
-
-.fortune-tabs .ant-tabs-tabpane {
-  height: 100%;
-  padding: 0;
-}
-
-/* 标签头部样式 */
-.fortune-tabs .ant-tabs-tab {
-  padding: 12px 20px;
-  font-size: 14px;
-  font-weight: 500;
-  border-radius: 8px 8px 0 0;
-  transition: all 0.3s ease;
-}
-
-.fortune-tabs .ant-tabs-tab:hover {
-  background: #f0f2f5;
-}
-
-.fortune-tabs .ant-tabs-tab-active {
-  background: #fff;
-  border-bottom: 2px solid #1890ff;
-}
-
-.fortune-tabs .ant-tabs-tab-active .ant-tabs-tab-btn {
-  color: #1890ff;
-  font-weight: 600;
-}
-
-/* 标签内容区域 */
 .tab-content {
-  height: 100%;
+  padding-bottom: 16px;
+}
+
+.fortune-context-pill {
+  position: absolute;
+  top: 38px;
+  right: 56px;
+  display: flex;
+  gap: 10px;
+  color: #8d8892;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.fortune-context-separator {
+  opacity: 0.5;
+}
+
+.fortune-workspace {
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  background: #fafafa;
-  border-radius: 0 0 8px 8px;
+  gap: 18px;
 }
 
-/* 标签头部信息 */
-.tab-header {
-  margin-bottom: 16px;
+.fortune-section-card {
+  padding: 18px 20px 18px;
+  border: 1px solid rgba(205, 193, 177, 0.42);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 18px rgba(120, 95, 68, 0.05);
 }
 
-.tab-header .tab-icon {
-  font-size: 24px;
-  color: #1890ff;
+.fortune-section-card-compact {
+  padding-bottom: 22px;
+}
+
+.fortune-section-heading {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  background: #e6f7ff;
-  border-radius: 50%;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
-/* 标签主体内容 */
-.tab-body {
-  flex: 1;
-  overflow-y: auto;
+.fortune-section-heading h3 {
+  margin: 0;
+  color: #1d2430;
+  font-size: 20px;
+  font-weight: 700;
 }
 
-/* 输入区域样式 */
-.input-section {
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+.fortune-section-heading span {
+  color: #8b8791;
+  font-size: 14px;
 }
 
-.input-section .ant-card-head {
-  background: #f8f9fa;
-  border-bottom: 1px solid #e9ecef;
+.fortune-form .ant-form-item {
+  margin-bottom: 14px;
 }
 
-.input-section .ant-card-head-title {
+.fortune-form .ant-form-item-label > label {
+  color: #666871;
+  font-size: 14px;
   font-weight: 600;
-  color: #495057;
 }
 
-/* 结果区域样式 */
-.result-section {
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+.fortune-form .ant-select {
+  width: 100%;
 }
 
-.result-section .ant-card-head {
-  background: #f8f9fa;
-  border-bottom: 1px solid #e9ecef;
+.fortune-form .ant-select-selector {
+  height: 46px !important;
+  padding: 0 14px !important;
+  border: 1px solid #dfd7cc !important;
+  background: #fffefc !important;
+  box-shadow: none !important;
 }
 
-.result-section .ant-card-head-title {
-  font-weight: 600;
-  color: #495057;
+.fortune-form .ant-select-single .ant-select-selector .ant-select-selection-item,
+.fortune-form .ant-select-single .ant-select-selector .ant-select-selection-placeholder {
+  line-height: 44px !important;
+  font-size: 15px;
 }
 
-/* 占位符样式 */
-.form-placeholder,
-.result-placeholder {
-  padding: 40px 20px;
-  text-align: center;
-  background: #fff;
-  border: 2px dashed #d9d9d9;
-  border-radius: 6px;
-  min-height: 120px;
+.fortune-form .ant-form-item-extra {
+  color: #9a9490;
+  font-size: 12px;
+}
+
+.fortune-inline-message {
+  margin-top: 6px;
+  color: #7c7f87;
+  font-size: 13px;
+}
+
+.fortune-inline-message-error {
+  color: #c4574a;
+}
+
+.fortune-submit-wrap {
+  margin-top: 8px;
+}
+
+.fortune-submit-button {
+  width: 100%;
+  height: 44px;
+  border: none;
+  color: #fff !important;
+  font-size: 18px;
+  font-weight: 700;
+  background: linear-gradient(180deg, #c99956 0%, #b68547 100%) !important;
+  box-shadow: 0 12px 24px rgba(183, 136, 69, 0.18);
+}
+
+.fortune-submit-button:hover,
+.fortune-submit-button:focus {
+  background: linear-gradient(180deg, #d2a664 0%, #b68547 100%) !important;
+}
+
+.fortune-footer-bar {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 6px 0;
+  color: #8e8b87;
+  font-size: 12px;
 }
 
-.form-placeholder:hover,
-.result-placeholder:hover {
-  border-color: #40a9ff;
-  background: #f6ffed;
+.fortune-footer-note::before {
+  content: '🔒';
+  margin-right: 6px;
 }
 
-/* 响应式设计 */
+.fortune-footer-warning {
+  color: #7f7c78;
+}
+
+.fortune-footer-warning::before {
+  content: '⚠️';
+  margin-right: 6px;
+}
+
+@media (max-width: 1280px) {
+  .fortune-tabs .ant-tabs-tab {
+    min-width: 176px;
+    margin-right: 12px !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .tab-panel {
+    padding: 18px;
+  }
+
+  .fortune-context-pill {
+    position: static;
+    margin: 0 10px 14px;
+  }
+
+  .fortune-tabs .ant-tabs-nav-wrap {
+    padding-inline: 0;
+  }
+}
+
 @media (max-width: 768px) {
   .tab-panel {
-    padding: 8px;
+    padding: 14px;
   }
-  
-  .tab-content {
-    padding: 12px;
+
+  .fortune-tabs .ant-tabs-nav-wrap {
+    padding-bottom: 12px;
   }
-  
+
+  .fortune-tabs .ant-tabs-nav-list {
+    width: 100%;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
   .fortune-tabs .ant-tabs-tab {
-    padding: 8px 12px;
-    font-size: 12px;
+    flex: 1 1 calc(50% - 8px);
+    min-width: calc(50% - 8px);
+    margin: 0 !important;
   }
-  
-  .tab-header .tab-icon {
-    width: 36px;
-    height: 36px;
-    font-size: 18px;
+
+  .fortune-section-card {
+    padding: 16px;
   }
-  
-  .form-placeholder,
-  .result-placeholder {
-    padding: 20px 12px;
-    min-height: 80px;
+
+  .fortune-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .fortune-footer-bar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
   }
 }
 
 @media (max-width: 480px) {
-  .fortune-tabs .ant-tabs-tab span {
-    display: none;
-  }
-  
   .fortune-tabs .ant-tabs-tab {
-    padding: 8px;
-    min-width: 48px;
+    flex-basis: 100%;
+    min-width: 100%;
   }
-}
 
-/* 动画效果 */
-.tab-content {
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+  .fortune-tab-label {
+    font-size: 15px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
-/* 标签切换动画 */
-.fortune-tabs .ant-tabs-content-animated {
-  transition: margin 0.3s ease;
-}
-
-/* 自定义滚动条 */
-.tab-body::-webkit-scrollbar {
-  width: 6px;
-}
-
-.tab-body::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 3px;
-}
-
-.tab-body::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 3px;
-}
-
-.tab-body::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
-}
-
-/* 深色主题支持 */
-@media (prefers-color-scheme: dark) {
-  .tab-panel {
-    background: #141414;
-  }
-  
-  .tab-content {
-    background: #1f1f1f;
-  }
-  
-  .input-section,
-  .result-section {
-    background: #262626;
-  }
-  
-  .form-placeholder,
-  .result-placeholder {
-    background: #1f1f1f;
-    border-color: #434343;
-  }
-  
-  .form-placeholder:hover,
-  .result-placeholder:hover {
-    background: #262626;
-    border-color: #1890ff;
+  .fortune-section-heading h3 {
+    font-size: 18px;
   }
 }

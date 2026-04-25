@@ -1,12 +1,12 @@
 import React from 'react';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Button } from 'antd';
 import {
   HomeOutlined,
-  CalendarOutlined,
+  AppstoreOutlined,
   StarOutlined,
-  ThunderboltOutlined,
+  AlignLeftOutlined,
   CompassOutlined,
-  EnvironmentOutlined,
+  BorderOutlined,
   TeamOutlined
 } from '@ant-design/icons';
 import { NAVIGATION_ITEMS } from '../../constants';
@@ -22,11 +22,11 @@ interface AppSidebarProps {
 
 const iconMap = {
   home: <HomeOutlined />,
-  calendar: <CalendarOutlined />,
+  calendar: <AppstoreOutlined />,
   star: <StarOutlined />,
-  thunderbolt: <ThunderboltOutlined />,
+  thunderbolt: <AlignLeftOutlined />,
   compass: <CompassOutlined />,
-  environment: <EnvironmentOutlined />,
+  environment: <BorderOutlined />,
   team: <TeamOutlined />
 };
 
@@ -63,6 +63,19 @@ const AppSidebar: React.FC<AppSidebarProps> = ({
           onClick={handleMenuClick}
           className="sidebar-menu"
         />
+
+        {!collapsed && (
+          <div className="sidebar-business-card">
+            <div className="sidebar-business-icon">
+              <TeamOutlined />
+            </div>
+            <div className="sidebar-business-title">商务合作</div>
+            <div className="sidebar-business-copy">携手共赢 · 合作共创</div>
+            <Button className="sidebar-business-button">立即联系</Button>
+          </div>
+        )}
+
+        <div className="sidebar-footer-note">信息仅用于测算，严格保密</div>
       </div>
     </Sider>
   );

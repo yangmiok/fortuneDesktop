@@ -4,14 +4,18 @@ import './App.css';
 
 function App() {
   const { 
-    ui: { sidebarCollapsed, activeTab },
+    ui: { sidebarCollapsed, activeMenu },
     toggleSidebar,
+    setActiveMenu,
     setActiveTab
   } = useAppStore();
 
   const handleMenuSelect = (key: string) => {
-    setActiveTab(key);
-    console.log('选择菜单项:', key);
+    setActiveMenu(key);
+
+    if (['bazi', 'ziwei', 'liuyao', 'qimen', 'fengshui'].includes(key)) {
+      setActiveTab(key);
+    }
   };
 
   return (
@@ -19,7 +23,7 @@ function App() {
       <MainLayout
         sidebarCollapsed={sidebarCollapsed}
         onToggleSidebar={toggleSidebar}
-        activeMenuItem={activeTab}
+        activeMenuItem={activeMenu}
         onMenuSelect={handleMenuSelect}
       >
         <TabPanel />

@@ -1,8 +1,6 @@
 import React from 'react';
 import { Layout, Typography, Button, Space } from 'antd';
 import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
   QuestionCircleOutlined,
   HistoryOutlined,
   TeamOutlined
@@ -37,13 +35,16 @@ const AppHeader: React.FC<AppHeaderProps> = ({
   return (
     <Header className="app-header">
       <div className="header-left">
-        <Button
-          type="text"
-          icon={sidebarCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        <button
+          type="button"
+          className="brand-mark"
           onClick={onToggleSidebar}
-          className="sidebar-toggle"
-        />
-        
+          aria-label={sidebarCollapsed ? '展开侧边栏' : '收起侧边栏'}
+        >
+          <span className="brand-mark-ring" />
+          <span className="brand-mark-dot" />
+        </button>
+
         <div className="app-branding">
           <Title level={3} className="app-title">
             {APP_INFO.title}
@@ -59,10 +60,10 @@ const AppHeader: React.FC<AppHeaderProps> = ({
           {HEADER_BUTTONS.map(button => (
             <Button
               key={button.key}
-              type="text"
+              type={button.key === 'business' ? 'default' : 'text'}
               icon={iconMap[button.icon as keyof typeof iconMap]}
               onClick={() => handleButtonClick(button.key)}
-              className="header-button"
+              className={`header-button ${button.key === 'business' ? 'header-button-primary' : ''}`}
             >
               <span className="button-text">{button.label}</span>
             </Button>

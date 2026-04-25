@@ -1,14 +1,12 @@
 import React from 'react';
-import { Form, Select, Row, Col, Card, Typography } from 'antd';
+import { Form, Select, Row, Col } from 'antd';
 import { BirthInfo, ValidationErrors } from '../../types';
 import { 
   YEAR_OPTIONS, 
   MONTH_OPTIONS, 
-  DAY_OPTIONS, 
   TIME_PERIODS 
 } from '../../constants';
 
-const { Title } = Typography;
 const { Option } = Select;
 
 interface BirthInfoFormProps {
@@ -22,7 +20,6 @@ const BirthInfoForm: React.FC<BirthInfoFormProps> = ({
   onChange,
   errors
 }) => {
-  // 处理字段变更
   const handleFieldChange = (field: keyof BirthInfo, fieldValue: any) => {
     onChange({
       ...value,
@@ -30,7 +27,6 @@ const BirthInfoForm: React.FC<BirthInfoFormProps> = ({
     });
   };
 
-  // 获取当前月份的天数
   const getDaysInMonth = (year?: number, month?: number) => {
     if (!year || !month) return 31;
     
@@ -38,7 +34,6 @@ const BirthInfoForm: React.FC<BirthInfoFormProps> = ({
     return date.getDate();
   };
 
-  // 生成日期选项（根据年月动态调整）
   const getDayOptions = () => {
     const maxDays = getDaysInMonth(value.year, value.month);
     return Array.from({ length: maxDays }, (_, i) => ({
@@ -47,7 +42,6 @@ const BirthInfoForm: React.FC<BirthInfoFormProps> = ({
     }));
   };
 
-  // 验证日期有效性
   const isValidDate = (year?: number, month?: number, day?: number) => {
     if (!year || !month || !day) return false;
     
@@ -58,13 +52,17 @@ const BirthInfoForm: React.FC<BirthInfoFormProps> = ({
   };
 
   return (
-    <Card title={<Title level={4}>出生信息</Title>} className="birth-info-form">
-      <Form layout="vertical" size="large">
-        <Row gutter={[16, 16]}>
-          {/* 出生年份 */}
-          <Col xs={24} sm={12} md={6}>
+    <section className="fortune-section-card">
+      <div className="fortune-section-heading">
+        <h3>出生信息</h3>
+        <span>八字 · 命运根基</span>
+      </div>
+
+      <Form layout="vertical" size="large" className="fortune-form">
+        <Row gutter={[24, 0]}>
+          <Col xs={24} md={12}>
             <Form.Item
-              label="出生年份"
+              label="年份"
               validateStatus={errors.year ? 'error' : ''}
               help={errors.year}
               required
@@ -74,9 +72,7 @@ const BirthInfoForm: React.FC<BirthInfoFormProps> = ({
                 value={value.year}
                 onChange={(val) => handleFieldChange('year', val)}
                 showSearch
-                filterOption={(input, option) =>
-                  option?.children?.toString().toLowerCase().includes(input.toLowerCase()) ?? false
-                }
+                optionFilterProp="children"
                 data-testid="year-select"
               >
                 {YEAR_OPTIONS.map(option => (
@@ -88,10 +84,9 @@ const BirthInfoForm: React.FC<BirthInfoFormProps> = ({
             </Form.Item>
           </Col>
 
-          {/* 出生月份 */}
-          <Col xs={24} sm={12} md={6}>
+          <Col xs={24} md={12}>
             <Form.Item
-              label="出生月份"
+              label="月份"
               validateStatus={errors.month ? 'error' : ''}
               help={errors.month}
               required
@@ -111,10 +106,9 @@ const BirthInfoForm: React.FC<BirthInfoFormProps> = ({
             </Form.Item>
           </Col>
 
-          {/* 出生日期 */}
-          <Col xs={24} sm={12} md={6}>
+          <Col xs={24} md={12}>
             <Form.Item
-              label="出生日期"
+              label="日期"
               validateStatus={errors.day ? 'error' : ''}
               help={errors.day}
               required
@@ -134,13 +128,13 @@ const BirthInfoForm: React.FC<BirthInfoFormProps> = ({
             </Form.Item>
           </Col>
 
-          {/* 出生时辰 */}
-          <Col xs={24} sm={12} md={6}>
+          <Col xs={24} md={12}>
             <Form.Item
-              label="出生时辰"
+              label="时辰"
               validateStatus={errors.hour ? 'error' : ''}
               help={errors.hour}
               required
+              extra="不确定时辰可选“不详”"
             >
               <Select
                 placeholder="选择时辰"
@@ -150,26 +144,22 @@ const BirthInfoForm: React.FC<BirthInfoFormProps> = ({
               >
                 {TIME_PERIODS.map(option => (
                   <Option key={option.value} value={option.value}>
-                    {option.label}
+                    {option.label.replace(' ', '(') + ')'}
                   </Option>
                 ))}
+                <Option value={-1}>不详</Option>
               </Select>
             </Form.Item>
           </Col>
         </Row>
 
-        {/* 日期验证提示 */}
         {value.year && value.month && value.day && !isValidDate(value.year, value.month, value.day) && (
-          <Row>
-            <Col span={24}>
-              <div style={{ color: '#ff4d4f', fontSize: '14px', marginTop: '8px' }}>
-                ⚠️ 请检查日期是否正确：{value.year}年{value.month}月{value.day}日
-              </div>
-            </Col>
-          </Row>
+          <div className="fortune-inline-message fortune-inline-message-error">
+            请检查日期是否正确：{value.year}年{value.month}月{value.day}日
+          </div>
         )}
       </Form>
-    </Card>
+    </section>
   );
 };
 

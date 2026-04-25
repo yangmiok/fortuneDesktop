@@ -142,6 +142,7 @@ export interface AppState {
   // 用户界面状态
   ui: {
     sidebarCollapsed: boolean;
+    activeMenu: string;
     activeTab: string;
     loading: boolean;
     theme: 'light' | 'dark';
@@ -173,6 +174,7 @@ export interface AppState {
 export interface AppActions {
   // UI操作
   toggleSidebar: () => void;
+  setActiveMenu: (menu: string) => void;
   setActiveTab: (tab: string) => void;
   setLoading: (loading: boolean) => void;
   
