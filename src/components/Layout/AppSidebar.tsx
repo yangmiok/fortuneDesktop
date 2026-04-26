@@ -9,6 +9,7 @@ import {
   AlignLeftOutlined,
   CompassOutlined,
   BorderOutlined,
+  UserOutlined,
   TeamOutlined
 } from '@ant-design/icons';
 import { NAVIGATION_ITEMS } from '../../constants';
@@ -30,6 +31,7 @@ const iconMap = {
   thunderbolt: <AlignLeftOutlined />,
   compass: <CompassOutlined />,
   environment: <BorderOutlined />,
+  user: <UserOutlined />,
   team: <TeamOutlined />
 };
 

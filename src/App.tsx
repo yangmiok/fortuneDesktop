@@ -15,7 +15,7 @@ function App() {
   const handleMenuSelect = (key: string) => {
     setActiveMenu(key);
 
-    if (['bazi', 'ziwei', 'liuyao', 'qimen', 'fengshui'].includes(key)) {
+    if (['bazi', 'ziwei', 'liuyao', 'qimen', 'fengshui', 'physiognomy'].includes(key)) {
       setActiveTab(key);
     }
   };

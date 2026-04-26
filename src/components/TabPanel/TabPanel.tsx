@@ -5,12 +5,15 @@ import {
   StarOutlined,
   ThunderboltOutlined,
   CompassOutlined,
-  HomeOutlined
+  HomeOutlined,
+  UserOutlined
 } from '@ant-design/icons';
+import { DEFAULT_CALCULATION_TYPE } from '../../constants';
 import { useAppStore } from '../../store';
 import { BirthInfo } from '../../types';
 import BirthInfoForm from '../Forms/BirthInfoForm';
 import LocationInfoForm from '../Forms/LocationInfoForm';
+import PhysiognomyForm from '../Forms/PhysiognomyForm';
 import './TabPanel.css';
 
 interface TabPanelProps {
@@ -43,6 +46,11 @@ const TAB_CONFIG = [
     key: 'fengshui',
     label: '风水堪舆',
     icon: <HomeOutlined />
+  },
+  {
+    key: 'physiognomy',
+    label: '手相面相',
+    icon: <UserOutlined />
   }
 ];
 
@@ -57,7 +65,7 @@ export const TabPanel: React.FC<TabPanelProps> = ({ className }) => {
     submitCalculation
   } = useAppStore();
 
-  const [currentTab, setCurrentTab] = useState<string>(activeTab || 'bazi');
+  const [currentTab, setCurrentTab] = useState<string>(activeTab || DEFAULT_CALCULATION_TYPE);
 
   useEffect(() => {
     if (activeTab && activeTab !== currentTab) {
@@ -69,36 +77,33 @@ export const TabPanel: React.FC<TabPanelProps> = ({ className }) => {
     setCurrentTab(key);
     setActiveTab(key);
     setActiveMenu(key);
-
-    try {
-      localStorage.setItem('fortune_active_tab', key);
-    } catch (error) {
-      console.warn('无法保存标签状态到本地存储:', error);
-    }
   };
-
-  useEffect(() => {
-    try {
-      const savedTab = localStorage.getItem('fortune_active_tab');
-      if (savedTab && TAB_CONFIG.find(tab => tab.key === savedTab)) {
-        setCurrentTab(savedTab);
-        setActiveTab(savedTab);
-      }
-    } catch (error) {
-      console.warn('无法从本地存储读取标签状态:', error);
-    }
-  }, [setActiveTab]);
 
   const validateForm = () => {
     const errors: Record<string, string> = {};
 
-    if (!currentData.year) errors.year = '请选择年份';
-    if (!currentData.month) errors.month = '请选择月份';
-    if (!currentData.day) errors.day = '请选择日期';
-    if (currentData.hour === undefined || currentData.hour === null) errors.hour = '请选择时辰';
-    if (!currentData.country) errors.country = '请选择国家/地区';
-    if (!currentData.province) errors.province = '请选择省份/州';
-    if (!currentData.city) errors.city = '请选择城市';
+    if (currentTab === 'physiognomy') {
+      if (!currentData.physiognomyMode) errors.physiognomyMode = '请选择分析方向';
+      if (!currentData.gender) errors.gender = '请选择性别';
+      if (!currentData.age) errors.age = '请输入年龄';
+      if ((currentData.physiognomyMode === 'palm' || currentData.physiognomyMode === 'both') && !currentData.palmSide) {
+        errors.palmSide = '请选择手掌';
+      }
+      if ((currentData.physiognomyMode === 'palm' || currentData.physiognomyMode === 'both') && !currentData.palmImages?.length) {
+        errors.palmImages = '请至少上传一张手掌图片';
+      }
+      if ((currentData.physiognomyMode === 'face' || currentData.physiognomyMode === 'both') && !currentData.faceImages?.length) {
+        errors.faceImages = '请至少上传一张面部图片';
+      }
+    } else {
+      if (!currentData.year) errors.year = '请选择年份';
+      if (!currentData.month) errors.month = '请选择月份';
+      if (!currentData.day) errors.day = '请选择日期';
+      if (currentData.hour === undefined || currentData.hour === null) errors.hour = '请选择时辰';
+      if (!currentData.country) errors.country = '请选择国家/地区';
+      if (!currentData.province) errors.province = '请选择省份/州';
+      if (!currentData.city) errors.city = '请选择城市';
+    }
 
     setValidationErrors(errors);
     return Object.keys(errors).length === 0;
@@ -106,7 +111,7 @@ export const TabPanel: React.FC<TabPanelProps> = ({ className }) => {
 
   const handleSubmit = async () => {
     if (!validateForm()) {
-      message.warning('请先补全测算信息');
+      message.warning(currentTab === 'physiognomy' ? '请先补全图像与个人信息' : '请先补全测算信息');
       return;
     }
 
@@ -137,22 +142,31 @@ export const TabPanel: React.FC<TabPanelProps> = ({ className }) => {
 
       <div className="tab-content">
         <div className="fortune-workspace">
-          <BirthInfoForm
-            value={currentData}
-            onChange={updateFormData}
-            errors={validationErrors}
-          />
+          {currentTab === 'physiognomy' ? (
+            <PhysiognomyForm
+              value={currentData}
+              onChange={updateFormData}
+              errors={validationErrors}
+            />
+          ) : (
+            <>
+              <BirthInfoForm
+                value={currentData}
+                onChange={updateFormData}
+                errors={validationErrors}
+              />
 
-          <LocationInfoForm
-            value={currentData}
-            onChange={updateFormData}
-            errors={validationErrors}
-          />
+              <LocationInfoForm
+                value={currentData}
+                onChange={updateFormData}
+                errors={validationErrors}
+              />
+            </>
+          )}
 
           <section className="fortune-section-card fortune-section-card-compact">
-            <div className="fortune-section-heading">
-              <h3>基本信息</h3>
-              <span>仅用于测算</span>
+            <div className="fortune-section-caption">
+              {currentTab === 'physiognomy' ? '图像与资料仅用于测算' : '基本信息仅用于测算'}
             </div>
 
             <div className="fortune-submit-wrap">

@@ -114,6 +114,15 @@
   letter-spacing: 0.12em;
 }
 
+.fortune-section-caption {
+  margin-bottom: 14px;
+  color: #8d8172;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-align: right;
+}
+
 .fortune-form .ant-form-item {
   margin-bottom: 16px;
 }
@@ -126,6 +135,12 @@
 }
 
 .fortune-form .ant-select {
+  width: 100%;
+}
+
+.fortune-form .ant-input-number,
+.fortune-form .ant-input,
+.fortune-form .ant-input-textarea {
   width: 100%;
 }
 
@@ -154,6 +169,43 @@
     0 0 0 3px rgba(213, 185, 141, 0.14) !important;
 }
 
+.fortune-form .ant-input-number,
+.fortune-form .ant-input,
+.fortune-form .ant-input-textarea textarea {
+  border: 1px solid #d9d0c4 !important;
+  border-radius: 16px !important;
+  background: linear-gradient(180deg, #fffdf9 0%, #fffaf3 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.86),
+    0 1px 2px rgba(96, 73, 40, 0.03) !important;
+}
+
+.fortune-form .ant-input-number {
+  height: 48px;
+  padding-inline: 4px;
+}
+
+.fortune-form .ant-input-number-input {
+  height: 46px;
+}
+
+.fortune-form .ant-input,
+.fortune-form .ant-input-textarea textarea {
+  padding: 12px 16px;
+}
+
+.fortune-form .ant-input-number:hover,
+.fortune-form .ant-input-number-focused,
+.fortune-form .ant-input:hover,
+.fortune-form .ant-input:focus,
+.fortune-form .ant-input-textarea textarea:hover,
+.fortune-form .ant-input-textarea textarea:focus {
+  border-color: rgba(188, 150, 91, 0.82) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 0 0 3px rgba(213, 185, 141, 0.14) !important;
+}
+
 .fortune-form .ant-form-item-extra {
   color: #988e84;
   font-size: 12px;
@@ -168,6 +220,125 @@
 
 .fortune-form-item-hour .ant-form-item-extra {
   padding-right: 8px;
+}
+
+.fortune-physiognomy-form .ant-upload-wrapper {
+  width: 100%;
+}
+
+.fortune-physiognomy-upload-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 10px 0 20px;
+}
+
+.fortune-upload-panel {
+  padding: 18px;
+  border: 1px solid rgba(217, 207, 193, 0.86);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.fortune-upload-panel.is-error {
+  border-color: rgba(196, 87, 74, 0.42);
+}
+
+.fortune-upload-panel-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.fortune-upload-panel-head h4 {
+  margin: 0 0 6px;
+  color: #2f3138;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.fortune-upload-panel-head p {
+  margin: 0;
+  color: #877c71;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.fortune-upload-panel-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(214, 183, 136, 0.24) 0%, rgba(191, 148, 81, 0.14) 100%);
+  color: #986b37;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.fortune-physiognomy-form .ant-upload-wrapper .ant-upload-select {
+  width: 112px !important;
+  height: 112px !important;
+  border-radius: 18px !important;
+  border-color: rgba(202, 186, 163, 0.92) !important;
+  background: linear-gradient(180deg, #fffdfa 0%, #faf3e8 100%) !important;
+}
+
+.fortune-physiognomy-form .ant-upload-wrapper .ant-upload-list-item-container,
+.fortune-physiognomy-form .ant-upload-wrapper .ant-upload-list-item {
+  width: 112px !important;
+  height: 112px !important;
+}
+
+.fortune-upload-trigger {
+  color: #8b643a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.fortune-segmented-radio {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.fortune-segmented-radio .ant-radio-button-wrapper {
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-color: #d9d0c4;
+  background: linear-gradient(180deg, #fffdf9 0%, #fffaf3 100%);
+}
+
+.fortune-segmented-radio .ant-radio-button-wrapper:first-child {
+  border-start-start-radius: 16px;
+  border-end-start-radius: 16px;
+}
+
+.fortune-segmented-radio .ant-radio-button-wrapper:last-child {
+  border-start-end-radius: 16px;
+  border-end-end-radius: 16px;
+}
+
+.fortune-segmented-radio .ant-radio-button-wrapper-checked {
+  color: #8a6033;
+  border-color: rgba(193, 158, 106, 0.8) !important;
+  background: linear-gradient(180deg, rgba(254, 250, 243, 0.98) 0%, rgba(248, 239, 225, 0.98) 100%) !important;
+  box-shadow: none;
+}
+
+.fortune-physiognomy-note {
+  margin-top: 4px;
+  color: #8b7e71;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .fortune-inline-message {
@@ -262,6 +433,10 @@
 
   .fortune-section-card {
     padding: 16px;
+  }
+
+  .fortune-physiognomy-upload-grid {
+    grid-template-columns: 1fr;
   }
 
   .fortune-section-heading {

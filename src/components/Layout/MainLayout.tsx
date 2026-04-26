@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import { LayoutProps } from '../../types';
+import { DEFAULT_CALCULATION_TYPE } from '../../constants';
 import AppHeader from './AppHeader';
 import AppSidebar from './AppSidebar';
 import './MainLayout.css';
@@ -18,7 +19,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
   children,
   sidebarCollapsed = false,
   onToggleSidebar,
-  activeMenuItem = 'home',
+  activeMenuItem = DEFAULT_CALCULATION_TYPE,
   onMenuSelect
 }) => {
   return (

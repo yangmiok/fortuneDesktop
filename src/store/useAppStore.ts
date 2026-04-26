@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { AppState, AppActions, UserPreferences, BirthInfo, ValidationErrors } from '../types';
-import { DEFAULT_PREFERENCES, DEFAULT_BIRTH_INFO } from '../constants';
+import { DEFAULT_PREFERENCES, DEFAULT_BIRTH_INFO, DEFAULT_CALCULATION_TYPE } from '../constants';
 
 interface AppStore extends AppState, AppActions {}
 
@@ -8,8 +8,8 @@ export const useAppStore = create<AppStore>((set) => ({
   // 初始状态
   ui: {
     sidebarCollapsed: false,
-    activeMenu: 'home',
-    activeTab: 'bazi',
+    activeMenu: DEFAULT_CALCULATION_TYPE,
+    activeTab: DEFAULT_CALCULATION_TYPE,
     loading: false,
     theme: 'light'
   },

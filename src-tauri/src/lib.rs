@@ -6,6 +6,9 @@ mod commands;
 use commands::*;
 use tauri::{Manager, PhysicalSize, Size};
 
+const MIN_WINDOW_WIDTH: u32 = 1080;
+const MIN_WINDOW_HEIGHT: u32 = 720;
+
 #[cfg(target_os = "macos")]
 fn apply_macos_app_icon() {
     use objc2::{AllocAnyThread, MainThreadMarker};
@@ -23,18 +26,26 @@ fn apply_macos_app_icon() {
 }
 
 fn configure_main_window(window: &tauri::WebviewWindow) -> tauri::Result<()> {
+    window.set_decorations(true)?;
+    window.set_resizable(true)?;
+    window.set_maximizable(true)?;
+    window.set_minimizable(true)?;
+    window.set_min_size(Some(Size::Physical(PhysicalSize::new(
+        MIN_WINDOW_WIDTH,
+        MIN_WINDOW_HEIGHT,
+    ))))?;
+
     if let Some(monitor) = window.current_monitor()? {
         let monitor_size = monitor.size();
         let width = ((monitor_size.width as f64) * 0.8).round() as u32;
         let height = ((monitor_size.height as f64) * 0.8).round() as u32;
+        let width = width.max(MIN_WINDOW_WIDTH);
+        let height = height.max(MIN_WINDOW_HEIGHT);
 
         window.set_size(Size::Physical(PhysicalSize::new(width, height)))?;
         window.center()?;
     }
 
-    window.set_resizable(true)?;
-    window.set_maximizable(true)?;
-    window.set_minimizable(true)?;
     window.show()?;
 
     Ok(())

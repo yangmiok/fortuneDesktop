@@ -21,9 +21,24 @@ export interface BirthInfo {
   lunarMonth?: number;
   lunarDay?: number;
   lunarHour?: number;
+
+  // 手相面相扩展信息
+  gender?: 'male' | 'female';
+  age?: number;
+  physiognomyMode?: 'palm' | 'face' | 'both';
+  palmSide?: 'left' | 'right' | 'both';
+  palmImages?: Array<{
+    name: string;
+    url: string;
+  }>;
+  faceImages?: Array<{
+    name: string;
+    url: string;
+  }>;
+  analysisNotes?: string;
 }
 
-export type CalculationType = 'bazi' | 'ziwei' | 'liuyao' | 'qimen' | 'fengshui';
+export type CalculationType = 'bazi' | 'ziwei' | 'liuyao' | 'qimen' | 'fengshui' | 'physiognomy';
 
 export interface BaseCalculationResult {
   id: string;

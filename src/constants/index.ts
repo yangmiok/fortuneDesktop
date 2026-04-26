@@ -9,7 +9,12 @@ export const DEFAULT_BIRTH_INFO = {
   minute: 0,
   country: '中国',
   province: '北京市',
-  city: '朝阳区'
+  city: '朝阳区',
+  physiognomyMode: 'both' as const,
+  palmSide: 'right' as const,
+  palmImages: [],
+  faceImages: [],
+  analysisNotes: ''
 };
 
 // 时辰选项
@@ -66,16 +71,20 @@ export const NAVIGATION_ITEMS = [
   { key: 'liuyao', label: '六爻预测', icon: 'thunderbolt' },
   { key: 'qimen', label: '奇门遁甲', icon: 'compass' },
   { key: 'fengshui', label: '风水堪舆', icon: 'environment' },
+  { key: 'physiognomy', label: '手相面相', icon: 'user' },
   { key: 'business', label: '商务合作', icon: 'team' }
 ];
 
 // 标签页配置
+export const DEFAULT_CALCULATION_TYPE = 'bazi' as const;
+
 export const TAB_ITEMS = [
   { key: 'bazi', label: '四柱八字' },
   { key: 'ziwei', label: '紫微斗数' },
   { key: 'liuyao', label: '六爻预测' },
   { key: 'qimen', label: '奇门遁甲' },
-  { key: 'fengshui', label: '风水堪舆' }
+  { key: 'fengshui', label: '风水堪舆' },
+  { key: 'physiognomy', label: '手相面相' }
 ];
 
 // 应用信息
@@ -98,7 +107,7 @@ export const DEFAULT_PREFERENCES = {
     country: '中国',
     province: '北京市',
     city: '朝阳区',
-    calculationType: 'bazi' as const
+    calculationType: DEFAULT_CALCULATION_TYPE
   },
   privacy: {
     saveHistory: true,

@@ -15,11 +15,12 @@
         "title": "fortunedesktop",
         "width": 1440,
         "height": 900,
-        "minWidth": 1280,
-        "minHeight": 820,
+        "minWidth": 1080,
+        "minHeight": 720,
         "resizable": true,
         "maximizable": true,
         "minimizable": true,
+        "decorations": true,
         "center": true,
         "visible": false
       }
