@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { getCurrentWindow } from '@tauri-apps/api/window';
 import { MainLayout, TabPanel } from './components';
 import { useAppStore } from './store';
 import './App.css';
@@ -17,6 +19,18 @@ function App() {
       setActiveTab(key);
     }
   };
+
+  useEffect(() => {
+    const applyWindowIcon = async () => {
+      try {
+        await getCurrentWindow().setIcon('/app-icon.png');
+      } catch (error) {
+        console.warn('无法设置窗口图标:', error);
+      }
+    };
+
+    applyWindowIcon();
+  }, []);
 
   return (
     <div className="fortune-app">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Tabs, Button, message } from 'antd';
+import { Button, message } from 'antd';
 import {
   BookOutlined,
   StarOutlined,
@@ -48,7 +48,7 @@ const TAB_CONFIG = [
 
 export const TabPanel: React.FC<TabPanelProps> = ({ className }) => {
   const { 
-    ui: { activeTab, activeMenu },
+    ui: { activeTab },
     setActiveTab,
     setActiveMenu,
     form: { currentData, validationErrors, isSubmitting },
@@ -114,71 +114,64 @@ export const TabPanel: React.FC<TabPanelProps> = ({ className }) => {
     message.success('测算信息已提交');
   };
 
-  const activeTabConfig = TAB_CONFIG.find((tab) => tab.key === currentTab);
-  const activeNavLabel = activeMenu === 'home'
-    ? '首页'
-    : activeTabConfig?.label ?? '首页';
-
   return (
     <div className={`tab-panel ${className || ''}`}>
-      <Tabs
-        activeKey={currentTab}
-        onChange={handleTabChange}
-        type="card"
-        size="large"
-        className="fortune-tabs"
-        tabPosition="top"
-        animated={{ inkBar: true, tabPane: true }}
-        items={TAB_CONFIG.map(tab => ({
-          key: tab.key,
-          label: <span className="fortune-tab-label">{tab.label}</span>,
-          children: (
-            <div className="tab-content">
-              <div className="fortune-workspace">
-                <BirthInfoForm
-                  value={currentData}
-                  onChange={updateFormData}
-                  errors={validationErrors}
-                />
+      <div className="fortune-tab-switcher" role="tablist" aria-label="测算类型">
+        {TAB_CONFIG.map((tab) => {
+          const isActive = tab.key === currentTab;
 
-                <LocationInfoForm
-                  value={currentData}
-                  onChange={updateFormData}
-                  errors={validationErrors}
-                />
+          return (
+            <button
+              key={tab.key}
+              type="button"
+              className={`fortune-tab-switcher-item ${isActive ? 'is-active' : ''}`}
+              onClick={() => handleTabChange(tab.key)}
+              aria-pressed={isActive}
+            >
+              <span className="fortune-tab-switcher-icon">{tab.icon}</span>
+              <span className="fortune-tab-switcher-text">{tab.label}</span>
+            </button>
+          );
+        })}
+      </div>
 
-                <section className="fortune-section-card fortune-section-card-compact">
-                  <div className="fortune-section-heading">
-                    <h3>基本信息</h3>
-                    <span>仅用于测算</span>
-                  </div>
+      <div className="tab-content">
+        <div className="fortune-workspace">
+          <BirthInfoForm
+            value={currentData}
+            onChange={updateFormData}
+            errors={validationErrors}
+          />
 
-                  <div className="fortune-submit-wrap">
-                    <Button
-                      type="primary"
-                      className="fortune-submit-button"
-                      loading={isSubmitting}
-                      onClick={handleSubmit}
-                    >
-                      提交测算
-                    </Button>
-                  </div>
-                </section>
-              </div>
+          <LocationInfoForm
+            value={currentData}
+            onChange={updateFormData}
+            errors={validationErrors}
+          />
 
-              <footer className="fortune-footer-bar">
-                <div className="fortune-footer-note">信息仅用于测算，严格保密</div>
-                <div className="fortune-footer-warning">结果仅供参考，理性看待</div>
-              </footer>
+          <section className="fortune-section-card fortune-section-card-compact">
+            <div className="fortune-section-heading">
+              <h3>基本信息</h3>
+              <span>仅用于测算</span>
             </div>
-          )
-        }))}
-      />
 
-      <div className="fortune-context-pill">
-        <span>{activeNavLabel}</span>
-        <span className="fortune-context-separator">/</span>
-        <span>{activeTabConfig?.label}</span>
+            <div className="fortune-submit-wrap">
+              <Button
+                type="primary"
+                className="fortune-submit-button"
+                loading={isSubmitting}
+                onClick={handleSubmit}
+              >
+                提交测算
+              </Button>
+            </div>
+          </section>
+        </div>
+
+        <footer className="fortune-footer-bar">
+          <div className="fortune-footer-note">信息仅用于测算，严格保密</div>
+          <div className="fortune-footer-warning">结果仅供参考，理性看待</div>
+        </footer>
       </div>
     </div>
   );

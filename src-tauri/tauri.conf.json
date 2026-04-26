@@ -13,8 +13,15 @@
     "windows": [
       {
         "title": "fortunedesktop",
-        "width": 800,
-        "height": 600
+        "width": 1440,
+        "height": 900,
+        "minWidth": 1280,
+        "minHeight": 820,
+        "resizable": true,
+        "maximizable": true,
+        "minimizable": true,
+        "center": true,
+        "visible": false
       }
     ],
     "security": {

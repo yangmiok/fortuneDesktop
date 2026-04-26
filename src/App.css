@@ -3,10 +3,8 @@
 @tailwind utilities;
 
 :root {
-  color: #1f2937;
-  background:
-    radial-gradient(circle at top left, rgba(201, 161, 101, 0.08), transparent 32%),
-    linear-gradient(180deg, #fbf8f3 0%, #f7f2eb 100%);
+  color: #272a33;
+  background: #f4eee6;
   font-family: 'PingFang SC', 'Noto Serif SC', 'Source Han Serif SC', sans-serif;
 }
 
@@ -22,10 +20,10 @@ body {
 body {
   margin: 0;
   padding: 0;
-  color: #1f2937;
+  color: #272a33;
   background:
-    radial-gradient(circle at top left, rgba(201, 161, 101, 0.08), transparent 32%),
-    linear-gradient(180deg, #fbf8f3 0%, #f7f2eb 100%);
+    radial-gradient(circle at top left, rgba(219, 196, 161, 0.14), transparent 30%),
+    linear-gradient(180deg, #f7f1e8 0%, #f0e8df 100%);
   font-family: 'PingFang SC', 'Noto Serif SC', 'Source Han Serif SC', sans-serif;
 }
 
@@ -69,6 +67,13 @@ a {
 
 .ant-select-dropdown {
   font-family: inherit;
+}
+
+.ant-select-dropdown,
+.ant-message-notice-content {
+  border: 1px solid rgba(218, 207, 191, 0.7);
+  border-radius: 16px !important;
+  box-shadow: 0 18px 30px rgba(87, 67, 41, 0.08) !important;
 }
 
 @media (max-width: 768px) {

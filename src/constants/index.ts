@@ -78,13 +78,6 @@ export const TAB_ITEMS = [
   { key: 'fengshui', label: '风水堪舆' }
 ];
 
-// 头部按钮配置
-export const HEADER_BUTTONS = [
-  { key: 'help', label: '使用帮助', icon: 'question-circle' },
-  { key: 'records', label: '测算记录', icon: 'history' },
-  { key: 'business', label: '商务合作', icon: 'team' }
-];
-
 // 应用信息
 export const APP_INFO = {
   title: '正统命理·精准测算',
@@ -114,8 +107,8 @@ export const DEFAULT_PREFERENCES = {
     cleanupDays: 30
   },
   window: {
-    width: 1200,
-    height: 800,
+    width: 1440,
+    height: 900,
     x: 0,
     y: 0,
     maximized: false

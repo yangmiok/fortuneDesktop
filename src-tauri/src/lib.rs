@@ -4,12 +4,57 @@ mod types;
 mod commands;
 
 use commands::*;
+use tauri::{Manager, PhysicalSize, Size};
+
+#[cfg(target_os = "macos")]
+fn apply_macos_app_icon() {
+    use objc2::{AllocAnyThread, MainThreadMarker};
+    use objc2_app_kit::{NSApplication, NSImage};
+    use objc2_foundation::NSData;
+
+    let icon_bytes = include_bytes!(concat!(env!("CARGO_MANIFEST_DIR"), "/icons/icon.png"));
+    let data = NSData::with_bytes(icon_bytes);
+
+    if let Some(app_icon) = NSImage::initWithData(NSImage::alloc(), &data) {
+        let mtm = unsafe { MainThreadMarker::new_unchecked() };
+        let app = NSApplication::sharedApplication(mtm);
+        unsafe { app.setApplicationIconImage(Some(&app_icon)) };
+    }
+}
+
+fn configure_main_window(window: &tauri::WebviewWindow) -> tauri::Result<()> {
+    if let Some(monitor) = window.current_monitor()? {
+        let monitor_size = monitor.size();
+        let width = ((monitor_size.width as f64) * 0.8).round() as u32;
+        let height = ((monitor_size.height as f64) * 0.8).round() as u32;
+
+        window.set_size(Size::Physical(PhysicalSize::new(width, height)))?;
+        window.center()?;
+    }
+
+    window.set_resizable(true)?;
+    window.set_maximizable(true)?;
+    window.set_minimizable(true)?;
+    window.show()?;
+
+    Ok(())
+}
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_sql::Builder::default().build())
+        .setup(|app| {
+            #[cfg(target_os = "macos")]
+            apply_macos_app_icon();
+
+            if let Some(window) = app.get_webview_window("main") {
+                configure_main_window(&window)?;
+            }
+
+            Ok(())
+        })
         .invoke_handler(tauri::generate_handler![
             validate_birth_info,
             calculate_bazi,

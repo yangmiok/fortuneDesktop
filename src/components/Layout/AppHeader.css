@@ -1,127 +1,70 @@
 .app-header {
-  height: 108px;
-  padding: 0 28px;
+  position: relative;
+  height: 110px;
+  padding: 0 34px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background: rgba(255, 252, 247, 0.92);
-  border-bottom: 1px solid rgba(188, 163, 122, 0.2);
+  justify-content: flex-start;
+  background: rgba(255, 252, 248, 0.92);
+  border-bottom: 1px solid rgba(214, 200, 181, 0.52);
+  backdrop-filter: blur(18px);
 }
 
 .header-left {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 20px;
+}
+
+.app-header::after {
+  content: '';
+  position: absolute;
+  left: 380px;
+  right: 34px;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(202, 181, 148, 0.55) 0%, rgba(202, 181, 148, 0.08) 100%);
 }
 
 .brand-mark {
-  width: 56px;
-  height: 56px;
-  border: 1px solid rgba(188, 147, 90, 0.35);
-  border-radius: 18px;
-  background: linear-gradient(180deg, #fffdf9 0%, #f6eee3 100%);
+  width: 62px;
+  height: 62px;
+  padding: 0;
+  border: none;
+  background: transparent;
   position: relative;
   cursor: pointer;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  box-shadow: none;
 }
 
-.brand-mark-ring {
-  position: absolute;
-  inset: 11px;
-  border: 3px solid #b98a4b;
-  border-radius: 50%;
-}
-
-.brand-mark-ring::after {
-  content: '';
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  border: 3px solid #b98a4b;
-  border-left-color: transparent;
-  border-bottom-color: transparent;
-  border-radius: 50%;
-  right: 4px;
-  top: 2px;
-  transform: rotate(20deg);
-}
-
-.brand-mark-dot {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #b98a4b;
-  left: 18px;
-  bottom: 16px;
+.brand-mark-image {
+  width: 62px;
+  height: 62px;
+  display: block;
 }
 
 .app-branding {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .app-title {
   margin: 0 !important;
-  color: #1f2431 !important;
-  font-size: 26px !important;
+  color: #22262d !important;
+  font-size: 30px !important;
   font-weight: 700 !important;
+  letter-spacing: 0.02em;
+  font-family: 'Noto Serif SC', 'Source Han Serif SC', serif;
 }
 
 .app-subtitle {
-  color: #7d7b7a !important;
-  font-size: 14px;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-}
-
-.header-right .ant-space {
-  gap: 12px !important;
-}
-
-.header-button {
-  height: 52px;
-  padding: 0 12px;
-  border: none;
-  color: #5f6470;
-  font-size: 15px;
-  background: transparent;
-  box-shadow: none;
-}
-
-.header-button:hover,
-.header-button:focus {
-  color: #af7e3f !important;
-  background: rgba(191, 148, 81, 0.08) !important;
-}
-
-.header-button .anticon {
-  font-size: 20px;
-}
-
-.header-button-primary {
-  min-width: 164px;
-  padding: 0 26px;
-  color: #fff;
-  border: 1px solid #bb8c4e;
-  background: linear-gradient(180deg, #c99956 0%, #b68547 100%);
-  box-shadow: 0 10px 20px rgba(177, 130, 67, 0.16);
-}
-
-.header-button-primary:hover,
-.header-button-primary:focus {
-  color: #fff !important;
-  border-color: #bb8c4e !important;
-  background: linear-gradient(180deg, #cea261 0%, #b68547 100%) !important;
-}
-
-.button-text {
-  font-size: 15px;
+  color: #827766 !important;
+  font-size: 13px;
   font-weight: 600;
+  letter-spacing: 0.12em;
 }
 
 @media (max-width: 1024px) {
@@ -131,7 +74,7 @@
   }
 
   .app-title {
-    font-size: 22px !important;
+    font-size: 24px !important;
   }
 
   .app-subtitle {
@@ -143,39 +86,15 @@
   .app-header {
     height: auto;
     padding: 18px 16px;
-    align-items: flex-start;
-    gap: 12px;
-    flex-direction: column;
+    align-items: center;
   }
 
-  .header-right,
-  .header-right .ant-space {
-    width: 100%;
-  }
-
-  .header-right .ant-space {
-    justify-content: space-between;
-  }
-
-  .header-button {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .header-button-primary {
-    min-width: 0;
+  .app-header::after {
+    display: none;
   }
 }
 
 @media (max-width: 576px) {
-  .button-text {
-    font-size: 13px;
-  }
-
-  .header-button {
-    padding: 0 10px;
-  }
-
   .app-title {
     font-size: 18px !important;
   }

@@ -1,34 +1,56 @@
 .main-layout {
   min-height: 100vh;
   padding: 0;
-  background: transparent;
+  background:
+    radial-gradient(circle at top left, rgba(222, 200, 167, 0.12), transparent 28%),
+    linear-gradient(180deg, #f7f2ea 0%, #f2ece4 100%);
 }
 
 .layout-body {
   flex: 1;
   min-height: 0;
+  overflow: hidden;
 }
 
 .main-content {
-  min-height: calc(100vh - 108px);
+  min-height: 0;
+  height: calc(100vh - 110px);
   padding: 0;
-  overflow: auto;
-  background: transparent;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(250, 247, 242, 0.84) 0%, rgba(247, 242, 234, 0.96) 100%);
 }
 
 .content-wrapper {
+  height: 100%;
   min-height: 100%;
-  background: rgba(255, 252, 247, 0.48);
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  padding: 20px 28px 26px;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 249, 0.7) 0%, rgba(250, 247, 242, 0.88) 100%);
 }
 
 @media (max-width: 1024px) {
   .main-content {
-    min-height: calc(100vh - 92px);
+    height: calc(100vh - 92px);
+  }
+
+  .content-wrapper {
+    padding: 18px;
   }
 }
 
 @media (max-width: 768px) {
   .main-content {
     min-height: auto;
+    height: auto;
+    overflow: visible;
+  }
+
+  .content-wrapper {
+    height: auto;
+    padding: 12px;
+    overflow: visible;
   }
 }

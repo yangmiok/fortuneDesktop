@@ -116,8 +116,8 @@ pub async fn get_user_preferences() -> Result<UserPreferences, String> {
             cleanup_days: 30,
         },
         window: WindowPreferences {
-            width: 1200,
-            height: 800,
+            width: 1440,
+            height: 900,
             x: 0,
             y: 0,
             maximized: false,

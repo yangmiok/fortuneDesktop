@@ -130,6 +130,7 @@ const BirthInfoForm: React.FC<BirthInfoFormProps> = ({
 
           <Col xs={24} md={12}>
             <Form.Item
+              className="fortune-form-item-hour"
               label="时辰"
               validateStatus={errors.hour ? 'error' : ''}
               help={errors.hour}

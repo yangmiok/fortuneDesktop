@@ -33,6 +33,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
           collapsed={sidebarCollapsed}
           activeKey={activeMenuItem}
           onSelect={onMenuSelect}
+          onToggle={onToggleSidebar}
         />
         
         <Content className="main-content">
