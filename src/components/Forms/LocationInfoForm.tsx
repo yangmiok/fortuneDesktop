@@ -24,10 +24,19 @@ const LocationInfoForm: React.FC<LocationInfoFormProps> = ({
     };
 
     if (field === 'country') {
-      newValue.province = '';
-      newValue.city = '';
+      const provinceOptions = LOCATION_DATA[fieldValue]
+        ? Object.keys(LOCATION_DATA[fieldValue])
+        : [];
+      const nextProvince = provinceOptions[0] || '';
+      const cityOptions = nextProvince ? LOCATION_DATA[fieldValue][nextProvince] : [];
+
+      newValue.province = nextProvince;
+      newValue.city = cityOptions[0] || '';
     } else if (field === 'province') {
-      newValue.city = '';
+      const cityOptions = value.country && LOCATION_DATA[value.country]?.[fieldValue]
+        ? LOCATION_DATA[value.country][fieldValue]
+        : [];
+      newValue.city = cityOptions[0] || '';
     }
 
     onChange(newValue);
@@ -179,12 +188,6 @@ const LocationInfoForm: React.FC<LocationInfoFormProps> = ({
         {value.country && value.province && value.city && !isLocationConsistent && (
           <div className="fortune-inline-message fortune-inline-message-error">
             位置信息不一致：{value.city} 不属于 {value.province}
-          </div>
-        )}
-
-        {value.country === '中国' && value.province === '北京市' && (
-          <div className="fortune-inline-message">
-            北京市（16个区）
           </div>
         )}
       </Form>

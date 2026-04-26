@@ -22,6 +22,14 @@ export interface BirthInfo {
   lunarDay?: number;
   lunarHour?: number;
 
+  // 紫微斗数扩展信息
+  chartType?: 'heaven' | 'earth';
+  calendarType?: 'lunar' | 'solar';
+
+  // 六爻扩展信息
+  divinationMethod?: 'time' | 'number' | 'coins';
+  questionText?: string;
+
   // 手相面相扩展信息
   gender?: 'male' | 'female';
   age?: number;

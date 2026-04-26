@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Select, Row, Col } from 'antd';
-import { BirthInfo, ValidationErrors } from '../../types';
+import { BirthInfo, CalculationType, ValidationErrors } from '../../types';
 import { 
   YEAR_OPTIONS, 
   MONTH_OPTIONS, 
@@ -13,12 +13,14 @@ interface BirthInfoFormProps {
   value: Partial<BirthInfo>;
   onChange: (data: Partial<BirthInfo>) => void;
   errors: ValidationErrors;
+  mode?: CalculationType;
 }
 
 const BirthInfoForm: React.FC<BirthInfoFormProps> = ({
   value,
   onChange,
-  errors
+  errors,
+  mode = 'bazi'
 }) => {
   const handleFieldChange = (field: keyof BirthInfo, fieldValue: any) => {
     onChange({
@@ -51,14 +53,115 @@ const BirthInfoForm: React.FC<BirthInfoFormProps> = ({
            date.getDate() === day;
   };
 
+  useEffect(() => {
+    if (mode !== 'ziwei') {
+      return;
+    }
+
+    const nextData: Partial<BirthInfo> = {};
+
+    if (!value.gender) {
+      nextData.gender = 'male';
+    }
+
+    if (!value.chartType) {
+      nextData.chartType = 'heaven';
+    }
+
+    if (!value.calendarType) {
+      nextData.calendarType = 'solar';
+    }
+
+    if (Object.keys(nextData).length > 0) {
+      onChange({
+        ...value,
+        ...nextData
+      });
+    }
+  }, [mode, onChange, value]);
+
+  const isZiweiMode = mode === 'ziwei';
+
   return (
     <section className="fortune-section-card">
       <div className="fortune-section-heading">
         <h3>出生信息</h3>
-        <span>八字 · 命运根基</span>
+        <span>{isZiweiMode ? '紫微 · 命盘定位' : '八字 · 命运根基'}</span>
       </div>
 
       <Form layout="vertical" size="large" className="fortune-form">
+        {isZiweiMode && (
+          <div className="fortune-ziwei-meta">
+            <Form.Item
+              label="性别"
+              validateStatus={errors.gender ? 'error' : ''}
+              help={errors.gender}
+              required
+            >
+              <div className="fortune-choice-toggle" data-testid="ziwei-gender-toggle">
+                {[
+                  { value: 'male', label: '男' },
+                  { value: 'female', label: '女' }
+                ].map((option) => {
+                  const isActive = value.gender === option.value;
+
+                  return (
+                    <button
+                      key={option.value}
+                      type="button"
+                      className={`fortune-choice-button ${isActive ? 'is-active' : ''}`}
+                      onClick={() => handleFieldChange('gender', option.value)}
+                    >
+                      <span className="fortune-choice-button-dot" aria-hidden="true" />
+                      <span>{option.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </Form.Item>
+
+            <Row gutter={[24, 0]}>
+              <Col xs={24} md={12}>
+                <Form.Item
+                  label="命盘类型"
+                  validateStatus={errors.chartType ? 'error' : ''}
+                  help={errors.chartType}
+                  required
+                >
+                  <Select
+                    placeholder="选择命盘类型"
+                    value={value.chartType}
+                    onChange={(val) => handleFieldChange('chartType', val)}
+                    data-testid="ziwei-chart-type-select"
+                  >
+                    <Option value="heaven">天盘</Option>
+                    <Option value="earth">地盘</Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+
+              <Col xs={24} md={12}>
+                <Form.Item
+                  label="历法"
+                  validateStatus={errors.calendarType ? 'error' : ''}
+                  help={errors.calendarType}
+                  required
+                >
+                  <Select
+                    placeholder="选择历法"
+                    value={value.calendarType}
+                    onChange={(val) => handleFieldChange('calendarType', val)}
+                    data-testid="ziwei-calendar-type-select"
+                  >
+                    <Option value="solar">阳历</Option>
+                    <Option value="lunar">阴历</Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+            </Row>
+          </div>
+        )}
+
         <Row gutter={[24, 0]}>
           <Col xs={24} md={12}>
             <Form.Item
