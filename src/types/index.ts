@@ -29,6 +29,10 @@ export interface BirthInfo {
   // 六爻扩展信息
   divinationMethod?: 'time' | 'number' | 'coins';
   questionText?: string;
+  fengshuiImages?: Array<{
+    name: string;
+    url: string;
+  }>;
 
   // 手相面相扩展信息
   gender?: 'male' | 'female';
@@ -47,6 +51,36 @@ export interface BirthInfo {
 }
 
 export type CalculationType = 'bazi' | 'ziwei' | 'liuyao' | 'qimen' | 'fengshui' | 'physiognomy';
+
+export interface DisplayResultMetric {
+  label: string;
+  value: string;
+}
+
+export interface DisplayResultSection {
+  title: string;
+  content: string;
+}
+
+export interface DisplayResultInputItem {
+  label: string;
+  value: string;
+}
+
+export interface DisplayResult {
+  id: string;
+  type: CalculationType;
+  title: string;
+  subtitle: string;
+  summary: string;
+  generatedAt: string;
+  highlights: string[];
+  metrics: DisplayResultMetric[];
+  sections: DisplayResultSection[];
+  suggestions: string[];
+  notes: string[];
+  inputSummary: DisplayResultInputItem[];
+}
 
 export interface BaseCalculationResult {
   id: string;
@@ -167,6 +201,7 @@ export interface AppState {
     sidebarCollapsed: boolean;
     activeMenu: string;
     activeTab: string;
+    currentView: 'form' | 'result';
     loading: boolean;
     theme: 'light' | 'dark';
   };
@@ -186,8 +221,8 @@ export interface AppState {
   
   // 计算结果状态
   results: {
-    current: CalculationResult | null;
-    history: CalculationResult[];
+    current: DisplayResult | null;
+    history: DisplayResult[];
     loading: boolean;
     error: string | null;
   };
@@ -199,6 +234,7 @@ export interface AppActions {
   toggleSidebar: () => void;
   setActiveMenu: (menu: string) => void;
   setActiveTab: (tab: string) => void;
+  setCurrentView: (view: 'form' | 'result') => void;
   setLoading: (loading: boolean) => void;
   
   // 表单操作

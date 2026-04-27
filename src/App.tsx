@@ -1,19 +1,21 @@
 import { useEffect } from 'react';
 import { getCurrentWindow } from '@tauri-apps/api/window';
-import { MainLayout, TabPanel } from './components';
+import { MainLayout, ResultPage, TabPanel } from './components';
 import { useAppStore } from './store';
 import './App.css';
 
 function App() {
   const { 
-    ui: { sidebarCollapsed, activeMenu },
+    ui: { sidebarCollapsed, activeMenu, currentView },
     toggleSidebar,
     setActiveMenu,
-    setActiveTab
+    setActiveTab,
+    setCurrentView
   } = useAppStore();
 
   const handleMenuSelect = (key: string) => {
     setActiveMenu(key);
+    setCurrentView('form');
 
     if (['bazi', 'ziwei', 'liuyao', 'qimen', 'fengshui', 'physiognomy'].includes(key)) {
       setActiveTab(key);
@@ -40,7 +42,7 @@ function App() {
         activeMenuItem={activeMenu}
         onMenuSelect={handleMenuSelect}
       >
-        <TabPanel />
+        {currentView === 'result' ? <ResultPage /> : <TabPanel />}
       </MainLayout>
     </div>
   );

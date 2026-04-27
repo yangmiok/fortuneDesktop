@@ -12,6 +12,7 @@ import { DEFAULT_CALCULATION_TYPE } from '../../constants';
 import { useAppStore } from '../../store';
 import { BirthInfo, CalculationType } from '../../types';
 import BirthInfoForm from '../Forms/BirthInfoForm';
+import FengshuiImageForm from '../Forms/FengshuiImageForm';
 import InquiryContentForm from '../Forms/InquiryContentForm';
 import LiuyaoForm from '../Forms/LiuyaoForm';
 import LocationInfoForm from '../Forms/LocationInfoForm';
@@ -61,6 +62,7 @@ export const TabPanel: React.FC<TabPanelProps> = ({ className }) => {
     ui: { activeTab },
     setActiveTab,
     setActiveMenu,
+    setCurrentView,
     form: { currentData, validationErrors, isSubmitting },
     updateFormData,
     setValidationErrors,
@@ -124,6 +126,15 @@ export const TabPanel: React.FC<TabPanelProps> = ({ className }) => {
       if (!currentData.province) errors.province = '请选择省份/州';
       if (!currentData.city) errors.city = '请选择城市';
       if (!currentData.questionText?.trim()) errors.questionText = '请输入占问内容';
+    } else if (currentTab === 'fengshui') {
+      if (!currentData.year) errors.year = '请选择年份';
+      if (!currentData.month) errors.month = '请选择月份';
+      if (!currentData.day) errors.day = '请选择日期';
+      if (currentData.hour === undefined || currentData.hour === null) errors.hour = '请选择时辰';
+      if (!currentData.country) errors.country = '请选择国家/地区';
+      if (!currentData.province) errors.province = '请选择省份/州';
+      if (!currentData.city) errors.city = '请选择城市';
+      if (!currentData.fengshuiImages?.length) errors.fengshuiImages = '请至少上传一张居家风水图片';
     } else {
       if (!currentData.year) errors.year = '请选择年份';
       if (!currentData.month) errors.month = '请选择月份';
@@ -144,6 +155,7 @@ export const TabPanel: React.FC<TabPanelProps> = ({ className }) => {
       return;
     }
 
+    setCurrentView('result');
     await submitCalculation(currentTab, currentData as BirthInfo);
     message.success('测算信息已提交');
   };
@@ -206,6 +218,14 @@ export const TabPanel: React.FC<TabPanelProps> = ({ className }) => {
                   testId="qimen-question-input"
                 />
               )}
+
+              {currentTab === 'fengshui' && (
+                <FengshuiImageForm
+                  value={currentData}
+                  onChange={updateFormData}
+                  errors={validationErrors}
+                />
+              )}
             </>
           )}
 
@@ -217,6 +237,8 @@ export const TabPanel: React.FC<TabPanelProps> = ({ className }) => {
                   ? '占问信息仅用于占断'
                   : currentTab === 'qimen'
                     ? '占问信息仅用于测算'
+                    : currentTab === 'fengshui'
+                      ? '环境图片仅用于勘舆分析'
                   : '基本信息仅用于测算'}
             </div>
 
