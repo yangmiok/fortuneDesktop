@@ -171,7 +171,6 @@ const buildMockResult = (type: CalculationType, data: BirthInfo): DisplayResult 
       suggestions: ['优先上传主空间全景照', '补充门口与床位视角', '先处理明显拥堵或遮挡区域'],
       notes: ['当前为结果页样式测试数据', '后续接入 API 后会替换为真实勘舆结果'],
       inputSummary: [
-        ...getBaseInputSummary(data),
         { label: '空间位置', value: location },
         { label: '图片素材', value: `${data.fengshuiImages?.length ?? 0} 张居家照片` }
       ]
